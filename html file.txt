@@ -1,0 +1,250 @@
+# S. Kumar - Data Analyst Portfolio
+
+Here are the separate HTML and CSS files for your portfolio. Create two files and use them together.
+
+---
+
+## FILE 1: index.html
+
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S. Kumar - Data Analyst Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">S. KUMAR</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">Welcome to my portfolio</p>
+                <h1 class="hero-title">Data Analyst & Business Intelligence Professional</h1>
+                <p class="hero-description">
+                    Transforming complex datasets into actionable insights. Specialized in predictive modeling, dashboard design, and data-driven decision making.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+                <div class="social-links">
+                    <a href="mailto:s0844404@gmail.com">✉ Email</a>
+                    <a href="#">🔗 LinkedIn</a>
+                    <a href="#">⚙ GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I'm a data analyst with hands-on experience in SQL, Python, R, and business intelligence tools. Passionate about extracting meaningful insights from complex datasets and translating them into strategic business solutions.</p>
+                    <p>With a strong foundation in statistical analysis, predictive modeling, and dashboard reporting, I help organizations make data-driven decisions that drive growth and operational efficiency.</p>
+                    <p>Currently pursuing advanced skills in data analytics and continuously exploring new technologies to stay ahead in the data landscape.</p>
+                </div>
+                <div class="about-info">
+                    <div class="info-card">
+                        <h3>📍 Location</h3>
+                        <p>Bengaluru, India</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>📞 Contact</h3>
+                        <p>8305519217</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>🎓 Education</h3>
+                        <p>B.Tech in Information Technology</p>
+                        <p class="small">CSVTU University (2019-2023) | CGPA: 8.5</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Customer Segmentation & CLTV Prediction</h3>
+                    <p class="project-tag">E-commerce Analysis</p>
+                    <p class="project-description">Developed RFM analysis and predictive models to segment customers and estimate lifetime value, resulting in targeted retention strategies.</p>
+                    <div class="project-details">
+                        <p><strong>Tools:</strong> Power BI, Excel, SQL, Python</p>
+                        <p><strong>Techniques:</strong> RFM Analysis, Regression, Data Modeling</p>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Analytics</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Sales Forecasting for Inventory Planning</h3>
+                    <p class="project-tag">Retail Inventory Planning</p>
+                    <p class="project-description">Built time series forecasting models (ARIMA) to predict sales trends and optimize inventory planning with data-driven insights.</p>
+                    <div class="project-details">
+                        <p><strong>Tools:</strong> Power BI, Excel, Python, SQL</p>
+                        <p><strong>Techniques:</strong> Time Series, ARIMA, KPI Reporting</p>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Forecasting</span>
+                        <span class="tag">SQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2>Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h3>Languages</h3>
+                    <ul>
+                        <li>SQL</li>
+                        <li>Python</li>
+                        <li>R</li>
+                    </ul>
+                </div>
+                <div class="skill-box">
+                    <h3>BI & Analytics</h3>
+                    <ul>
+                        <li>Power BI</li>
+                        <li>Tableau</li>
+                        <li>Excel</li>
+                    </ul>
+                </div>
+                <div class="skill-box">
+                    <h3>Statistical Methods</h3>
+                    <ul>
+                        <li>Regression</li>
+                        <li>Time Series Forecasting</li>
+                        <li>Hypothesis Testing</li>
+                    </ul>
+                </div>
+                <div class="skill-box">
+                    <h3>Libraries</h3>
+                    <ul>
+                        <li>Pandas</li>
+                        <li>NumPy</li>
+                        <li>Matplotlib</li>
+                        <li>Seaborn</li>
+                    </ul>
+                </div>
+                <div class="skill-box">
+                    <h3>Databases</h3>
+                    <ul>
+                        <li>MySQL</li>
+                        <li>SQL Server</li>
+                    </ul>
+                </div>
+                <div class="skill-box">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li>Data Cleaning</li>
+                        <li>Predictive Analytics</li>
+                        <li>Dashboard Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2>Experience & Certifications</h2>
+            
+            <h3 class="section-title">Professional Experience</h3>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <h4>Data Analyst Training</h4>
+                    <span class="exp-date">Jun 2025 - Nov 2025</span>
+                </div>
+                <p class="exp-company">Besant Technologies, Bengaluru</p>
+                <ul class="exp-list">
+                    <li>Extract, transform, and validate large datasets using SQL and Excel automation</li>
+                    <li>Perform statistical analysis and build predictive models in Python/R</li>
+                    <li>Develop interactive dashboards using Power BI for KPI monitoring</li>
+                    <li>Implement data quality checks to ensure accuracy and consistency</li>
+                </ul>
+            </div>
+
+            <h3 class="section-title">Certifications</h3>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <span class="cert-check">✓</span>
+                    <p>Tableau Desktop Specialist Certification (Jul 2024)</p>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-check">✓</span>
+                    <p>Power BI Micro Course - ISO 9001 Certified (Sep 2024)</p>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-check">✓</span>
+                    <p>One Road Map Skill Test in Data Analytics (Sep 2025)</p>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-check">✓</span>
+                    <p>Tableau Course for Beginners (Jul 2024)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p class="contact-description">
+                I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
+            </p>
+            
+            <div class="contact-buttons">
+                <a href="mailto:s0844404@gmail.com" class="btn btn-primary">📧 Send Email</a>
+                <a href="tel:8305519217" class="btn btn-secondary">📞 Call Me</a>
+            </div>
+
+            <div class="contact-social">
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+            </div>
+
+            <div class="footer">
+                <p>&copy; 2025 S. Kumar. All rights reserved.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
