@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S Kumar — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080C10;
+    --bg2: #0D1117;
+    --surface: #111820;
+    --surface2: #162030;
+    --border: rgba(0,200,160,0.15);
+    --accent: #00C8A0;
+    --accent2: #00A3FF;
+    --accent3: #FF6B35;
+    --text: #E8F0F8;
+    --muted: #6B8099;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --display: 'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* === NOISE OVERLAY === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* === GRID BACKGROUND === */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,160,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* === HERO === */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    opacity: 0.25;
+  }
+
+  .orb-1 {
+    width: 600px; height: 600px;
+    background: var(--accent);
+    top: -100px; right: -100px;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+
+  .orb-2 {
+    width: 400px; height: 400px;
+    background: var(--accent2);
+    bottom: -50px; left: 10%;
+    animation: drift 9s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(30px, -30px) scale(1.05); }
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 30px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1.hero-name {
+    font-family: var(--display);
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+
+  .hero-name .first { color: var(--text); }
+  .hero-name .last {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent);
+  }
+
+  .hero-subtitle {
+    font-family: var(--sans);
+    font-size: 1.15rem;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 520px;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.6s forwards;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.8s forwards;
+  }
+
+  .stat-item {}
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.3rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 1s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-weight: 700;
+  }
+
+  .btn-primary:hover {
+    background: #00e0b3;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,200,160,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .hero-right {
+    position: absolute;
+    right: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1s 1.2s forwards;
+  }
+
+  .terminal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 320px;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  .terminal-bar {
+    background: var(--surface2);
+    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .t-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .t-red { background: #FF5F57; }
+  .t-yellow { background: #FEBC2E; }
+  .t-green { background: #28C840; }
+
+  .terminal-title {
+    margin-left: 0.5rem;
+    color: var(--muted);
+    font-size: 0.68rem;
+  }
+
+  .terminal-body {
+    padding: 1.2rem;
+    line-height: 2;
+  }
+
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: var(--text); }
+  .t-output { color: var(--muted); padding-left: 1rem; }
+  .t-highlight { color: var(--accent2); }
+  .t-warn { color: var(--accent3); }
+
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 13px;
+    background: var(--accent);
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+
+  /* === SECTIONS === */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 7rem 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* === SKILLS === */
+  #skills { background: var(--bg2); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: top;
+  }
+
+  .skill-card:hover::before { transform: scaleY(1); }
+  .skill-card:hover { border-color: rgba(0,200,160,0.3); transform: translateX(4px); }
+
+  .skill-cat {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    background: rgba(0,200,160,0.08);
+    border: 1px solid rgba(0,200,160,0.2);
+    color: var(--text);
+    letter-spacing: 0.04em;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .tag:hover {
+    background: rgba(0,200,160,0.2);
+    color: var(--accent);
+  }
+
+  /* === EXPERIENCE === */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .exp-item {
+    position: relative;
+    margin-bottom: 4rem;
+    padding-left: 2.5rem;
+  }
+
+  .exp-dot {
+    position: absolute;
+    left: -2.5rem;
+    top: 0.4rem;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(0,200,160,0.15);
+  }
+
+  .exp-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  .exp-badge {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(0,163,255,0.1);
+    border: 1px solid rgba(0,163,255,0.3);
+    color: var(--accent2);
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+  }
+
+  .exp-role {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+  }
+
+  .exp-bullets li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: #A0B8CC;
+    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.15rem;
+  }
+
+  .metric {
+    color: var(--accent);
+    font-weight: 500;
+    font-family: var(--mono);
+    font-size: 0.85em;
+  }
+
+  /* === PROJECTS === */
+  #projects { background: var(--bg2); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.8rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,200,160,0.04), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover { border-color: rgba(0,200,160,0.35); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .project-card:hover::after { opacity: 1; }
+
+  .proj-domain {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent3);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.8rem;
+  }
+
+  .proj-name {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .proj-points {
+    list-style: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .proj-points li {
+    font-size: 0.85rem;
+    color: #A0B8CC;
+    padding: 0.4rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+  }
+
+  .proj-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .proj-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    padding: 0.25rem 0.55rem;
+    background: rgba(255,107,53,0.08);
+    border: 1px solid rgba(255,107,53,0.2);
+    color: var(--accent3);
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  /* === EDUCATION === */
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    transition: border-color 0.3s;
+  }
+
+  .edu-card:hover { border-color: rgba(0,200,160,0.3); }
+
+  .edu-degree {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-school { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+
+  .edu-right { text-align: right; flex-shrink: 0; }
+
+  .edu-year {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-cgpa {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .edu-cgpa-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .certs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .cert-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* === CONTACT === */
+  #contact {
+    background: var(--bg);
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-title {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+  }
+
+  .contact-sub {
+    color: var(--muted);
+    margin-bottom: 3rem;
+    font-size: 1rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.8rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+
+  .contact-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(0,200,160,0.06);
+    transform: translateY(-2px);
+  }
+
+  /* === FOOTER === */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* === SCROLLBAR === */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    #hero { padding: 8rem 1.5rem 4rem; }
+    .hero-right { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero-stats { gap: 2rem; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    h1.hero-name { font-size: 3rem; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .edu-card { flex-direction: column; }
+    .edu-right { text-align: left; }
+  }
+
+  /* === REVEAL ON SCROLL === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">S_KUMAR.DA</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb-1 hero-orb"></div>
+  <div class="orb-2 hero-orb"></div>
+
+  <div class="hero-inner">
+    <div class="hero-tag">Data Analyst · Bengaluru, India</div>
+    <h1 class="hero-name">
+      <span class="first">S </span><span class="last">Kumar</span>
+    </h1>
+    <p class="hero-subtitle">
+      Turning raw data into revenue-driving decisions. Specialised in SQL, Python, Power BI, and PySpark across e-commerce, retail, and fraud risk domains.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">85%</div>
+        <div class="stat-label">SQL Runtime Reduction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">95%</div>
+        <div class="stat-label">Forecast Accuracy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">70%</div>
+        <div class="stat-label">Reporting Automation</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">88%+</div>
+        <div class="stat-label">AUC Churn Model</div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="terminal-card">
+      <div class="terminal-bar">
+        <div class="t-dot t-red"></div>
+        <div class="t-dot t-yellow"></div>
+        <div class="t-dot t-green"></div>
+        <span class="terminal-title">analyst@skumar ~ bash</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">❯ </span><span class="t-cmd">python profile.py</span></div>
+        <div class="t-output"><span class="t-highlight">Name</span>: S Kumar</div>
+        <div class="t-output"><span class="t-highlight">Role</span>: Data Analyst</div>
+        <div class="t-output"><span class="t-highlight">Exp</span>: <span class="t-warn">1+ year</span></div>
+        <div class="t-output"><span class="t-highlight">Stack</span>: SQL · Python · PySpark</div>
+        <div class="t-output"><span class="t-highlight">Viz</span>: Power BI · Tableau</div>
+        <div class="t-output"><span class="t-highlight">Cloud</span>: AWS · Azure · GCP</div>
+        <div class="t-output"><span class="t-highlight">Domains</span>: Fraud · Risk · BI</div>
+        <div class="t-output"><span class="t-highlight">Status</span>: <span class="t-warn">Open to opportunities</span></div>
+        <div><span class="t-prompt">❯ </span><span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-cat">Programming</div>
+      <div class="skill-tags">
+        <span class="tag">SQL</span>
+        <span class="tag">Python</span>
+        <span class="tag">PySpark</span>
+        <span class="tag">R</span>
+        <span class="tag">DAX</span>
+        <span class="tag">CTEs</span>
+        <span class="tag">Window Functions</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Visualisation</div>
+      <div class="skill-tags">
+        <span class="tag">Power BI</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">DAX</span>
+        <span class="tag">RLS</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">XLOOKUP</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Data Engineering</div>
+      <div class="skill-tags">
+        <span class="tag">ETL Pipelines</span>
+        <span class="tag">Apache Airflow</span>
+        <span class="tag">dbt</span>
+        <span class="tag">Star Schema</span>
+        <span class="tag">Snowflake Schema</span>
+        <span class="tag">Data Warehousing</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Databases & Cloud</div>
+      <div class="skill-tags">
+        <span class="tag">MySQL</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Oracle</span>
+        <span class="tag">Snowflake</span>
+        <span class="tag">BigQuery</span>
+        <span class="tag">Redshift</span>
+        <span class="tag">AWS</span>
+        <span class="tag">Azure</span>
+        <span class="tag">GCP</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Analytics & Statistics</div>
+      <div class="skill-tags">
+        <span class="tag">A/B Testing</span>
+        <span class="tag">Hypothesis Testing</span>
+        <span class="tag">Regression</span>
+        <span class="tag">Time Series</span>
+        <span class="tag">RFM Analysis</span>
+        <span class="tag">Anomaly Detection</span>
+        <span class="tag">Fraud Analytics</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-cat">Libraries & Tools</div>
+      <div class="skill-tags">
+        <span class="tag">Pandas</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">Git</span>
+        <span class="tag">JIRA</span>
+        <span class="tag">Agile/Scrum</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="exp-item reveal">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <span class="exp-date">NOV 2025 – APR 2026</span>
+        <span class="exp-badge">Remote</span>
+      </div>
+      <div class="exp-role">Data Analyst</div>
+      <div class="exp-company">Lets Grow More · Bengaluru</div>
+      <ul class="exp-bullets">
+        <li>Analysed <span class="metric">500K+</span> records via SQL and Python; applied hypothesis testing at <span class="metric">95% confidence</span> to validate insights and deliver process improvement recommendations.</li>
+        <li>Built <span class="metric">8+ automated Power BI reports</span> replacing manual Excel workflows, saving <span class="metric">6 hrs/week</span> and improving data accuracy by <span class="metric">30%</span>; enforced data quality governance standards.</li>
+        <li>Developed large-scale ETL pipelines using PySpark and Apache Airflow achieving <span class="metric">50% availability gain</span>; authored BRD/FRD for 2 analytics products; facilitated UAT sign-off; all scripts version-controlled in Git.</li>
+      </ul>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <span class="exp-date">MAY 2025 – NOV 2025</span>
+        <span class="exp-badge">Onsite</span>
+      </div>
+      <div class="exp-role">Data Analyst</div>
+      <div class="exp-company">Besant Technologies · Bengaluru</div>
+      <ul class="exp-bullets">
+        <li>Queried and analysed <span class="metric">2M+ row</span> datasets using SQL and Python; reduced ad-hoc reporting turnaround by <span class="metric">40%</span> across 3 business units; conducted gap analysis to align dashboards with stakeholder requirements.</li>
+        <li>Built <span class="metric">5+ interactive Power BI / Tableau dashboards</span> for KPI tracking; documented BRD/FRD and translated requirements into analytical frameworks using Agile/Scrum methodology.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Key Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="proj-domain">E-Commerce</div>
+      <div class="proj-name">Customer Segmentation, CLTV & Risk Analysis</div>
+      <ul class="proj-points">
+        <li>Cleaned 500K+ Oracle data mart records; applied RFM segmentation and anomaly detection to uncover 3 fraud clusters, reducing false negatives by <strong>22%</strong>.</li>
+        <li>Built Scikit-Learn CLTV regression model (p &lt; 0.01); top cohort drove <strong>80% of revenue</strong>; delivered executive Power BI fraud dashboard for weekly stakeholder reviews.</li>
+      </ul>
+      <div class="proj-tech">
+        <span class="proj-tag">Python</span>
+        <span class="proj-tag">SQL</span>
+        <span class="proj-tag">Scikit-Learn</span>
+        <span class="proj-tag">RFM</span>
+        <span class="proj-tag">Oracle</span>
+        <span class="proj-tag">Power BI</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="proj-domain">Retail</div>
+      <div class="proj-name">Demand Forecasting & Inventory Optimisation</div>
+      <ul class="proj-points">
+        <li>Developed time-series forecasting model with <strong>95% accuracy</strong>, cutting over-stock write-offs by <strong>18% QoQ</strong>; validated via A/B testing at 95% CI.</li>
+        <li>SQL tuning reduced processing time by <strong>85%</strong>; root cause analysis eliminated stock-out risk across top-20 SKUs at peak demand periods.</li>
+      </ul>
+      <div class="proj-tech">
+        <span class="proj-tag">Time Series</span>
+        <span class="proj-tag">SQL</span>
+        <span class="proj-tag">A/B Testing</span>
+        <span class="proj-tag">Python</span>
+        <span class="proj-tag">Root Cause Analysis</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="proj-domain">Consumer Internet</div>
+      <div class="proj-name">Customer Churn Prediction</div>
+      <ul class="proj-points">
+        <li>Built Python (Scikit-Learn) churn pipeline achieving <strong>88%+ AUC</strong>; hypothesis testing confirmed feature significance; engineered 20+ behavioural features via Pandas and SQL window functions.</li>
+        <li>Delivered Power BI retention dashboard targeting high-risk segments, improving <strong>30-day retention by 12%</strong> through data-driven growth interventions.</li>
+      </ul>
+      <div class="proj-tech">
+        <span class="proj-tag">Scikit-Learn</span>
+        <span class="proj-tag">Pandas</span>
+        <span class="proj-tag">Feature Engineering</span>
+        <span class="proj-tag">Power BI</span>
+        <span class="proj-tag">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Education & Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-card reveal">
+    <div>
+      <div class="edu-degree">B.Tech — Information Technology</div>
+      <div class="edu-school">Shri Shankaracharya Technical Campus, CSVTU</div>
+      <div class="certs">
+        <div class="cert-item"><div class="cert-dot"></div>Data Analyst – One Road Map (2025)</div>
+        <div class="cert-item"><div class="cert-dot"></div>Power BI Micro Course – ISO 9001 Certified (2025)</div>
+        <div class="cert-item"><div class="cert-dot"></div>Skill Test – Data Analytics</div>
+      </div>
+    </div>
+    <div class="edu-right">
+      <div class="edu-year">JUN 2019 – JUN 2023</div>
+      <div class="edu-cgpa">8.5</div>
+      <div class="edu-cgpa-label">CGPA / 10</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-header reveal" style="justify-content: center; text-align: center; flex-direction: column; gap: 0.5rem;">
+      <span class="section-num">05</span>
+      <h2 class="contact-title reveal">Let's Connect</h2>
+    </div>
+    <p class="contact-sub reveal">Open to data analyst roles, freelance analytics projects, and interesting collaborations.</p>
+    <div class="contact-links reveal">
+      <a class="contact-link" href="mailto:s0844404@gmail.com">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        s0844404@gmail.com
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/s-kumar-a9a908221" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a class="contact-link" href="https://github.com/s-kumar" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a class="contact-link" href="tel:+918305519217">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.27-.55a2 2 0 012.11.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +91 83055 19217
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built from resume data · S Kumar · Data Analyst · Bengaluru, India
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
